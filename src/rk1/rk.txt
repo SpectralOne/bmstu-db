@@ -1,0 +1,68 @@
+Богаченко Артем ИУ7-56Б, вариант 9
+
+DC - таблица DriverID, CarID
+
+@mRrvz
+Задание номер 1
+
+1. Найти все пары вида <ФИО водителя, дата регистрации его автомобиля>
+
+SQL:
+Select (Drivers.FIO, Cars.RegistrationDate) from
+Drivers D join DC on D.DriverID = DC.DriverID
+join Cars C on DC.CarID = C.CarID
+
+РА: 
+(Drivers join DC join Cars)[FIO, RegistrationDate]
+
+ИК:
+range OF DX is Drivers
+range OF DCX is DC
+range OF CX is Cars
+(DX.FIO, CX.RegistrationDate) where exists DX (DX.DriverID = DCX.DriverID and exists CX (CX.CarID = DCX.CarID))
+
+2. Найти телефоны водителей, у которых есть белая машина 2018 года выпуска
+
+SQL:
+select Drivers.Phone from Drivers
+join DC ON DC.DriverID = Drivers.DriverID
+join Cars on Cars.CarID = DC.CarID where 
+Cars.Color = 'white' AND Cars.Year = 2018
+
+@hackfeed
+РА:
+(((Cars where Color = 'white' and Year = 2018) join DC) JOIN Drivers)[Phone]
+
+ИК:
+Drivers.Phone where exists Cars exists DC (
+Cars.Color = 'white' and Cars.Year = 2018 
+and Cars.CarsID = DC.CarsID and Drivers.DriverID = DC.DriverID)
+
+@hackfeed
+3. Найти машины, которыми владеют более 2х водителей
+
+SQL:
+select CarID from DC 
+group by CarID having COUNT(*) > 2
+
+РА:
+((summarize DC per DC{CarID} add count as C)[CarID, C]) where C > 2)[C]
+
+ИК:
+range of DCX is DC
+range of DCY is DC
+range of CX is Cars
+DCX where COUNT(DCY where DCY.CarID = CX.CarID) > 2
+
+@CATFELLA
+Задание номер 2
+
+R(A,B,C,D,E,F)
+F{ A->BC,
+   AC->DE,
+   D->F,
+   E->AB }
+
+F{ A->B, A->C, AC->D, AC->E, D->F, E->A, E->B }
+F{ A->C, A->C, A->D, A->E, D->F, F->A, E->B }
+F{ A->C, A->D, A->E, D->F, E->A, E->B }

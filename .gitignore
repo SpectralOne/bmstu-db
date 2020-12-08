@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+instance/
+.webassets-cache
+__pypackages__/
+.env
+data/db
+.vscode/
+*.json
+test/
