@@ -1,1 +1,3 @@
 # bmstu-db
+
+Zvezdi...
