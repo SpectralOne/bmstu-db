@@ -1,6 +1,16 @@
 version: "3"
 
 services:
+  nifi:
+    image: apache/nifi:latest
+    container_name: nifi
+    environment:
+      - NIFI_WEB_HTTP_PORT=8080
+    volumes:
+      - ./src/lab8:/opt/nifi/nifi-current/userdata
+    ports:
+      - 8080:8080
+
   db:
     build: 
       context: .
