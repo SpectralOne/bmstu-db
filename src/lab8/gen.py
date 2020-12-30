@@ -56,16 +56,20 @@ scientists = [
 ]
 
 def gen_new_scientist():
-    name = random.choice(scientists)
-    while name in scientists:
-        name = ''.join(random.choice(string.ascii_lowercase)
-                                for _ in range(15)).capitalize()
-    century = random.randint(-10, 21)
-    rec = {
-        'sname': name,
-        'century': century
-    }
-    return json.dumps(rec)
+    arr = []
+    for _ in range(4):
+        name = random.choice(scientists)
+        while name in scientists:
+            name = ''.join(random.choice(string.ascii_lowercase)
+                                    for _ in range(15)).capitalize()
+        century = random.randint(-10, 21)
+        rec = {
+            'sname': name,
+            'century': century
+        }
+        arr.append(rec)
+    
+    return json.dumps(arr)
 
 
 if __name__ == '__main__':
