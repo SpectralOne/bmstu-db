@@ -1,2 +1,4 @@
 psycopg2>=2.8.5,<2.9.0
 python-dotenv
+py-linq
+SQLAlchemy
